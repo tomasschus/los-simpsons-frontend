@@ -1,0 +1,6 @@
+<h1 class="title text-center">Los Simpsons</h1>
+<h4 class="text-center">Aqui encontrarás todos los capitulos de la serie mas aclamada de todo el mundo</h4>
+
+<app-listado *ngIf="capSelect == undefined" [allCapitulos]="allCapitulos" (seleccion)="seleccionar($event)"> </app-listado>
+
+<app-capitulo *ngIf="capSelect!=undefined" [capSelect]="capSelect" (volver)="capSelect=undefined" ></app-capitulo>
