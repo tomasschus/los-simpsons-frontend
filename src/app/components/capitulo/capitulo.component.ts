@@ -17,6 +17,7 @@ export class CapituloComponent implements OnInit {
   ngOnInit(): void {
     this.urlFinal = `https://drive.google.com/file/d/${this.capSelect["id"]}/preview` 
     console.log(this.urlFinal)
+    
   }
 
   volverBtn(){

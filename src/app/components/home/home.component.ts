@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ListadoComponent } from 'src/app/listado/listado.component';
 import { CloudService } from 'src/app/services/cloud.service';
 
 @Component({
@@ -8,18 +9,33 @@ import { CloudService } from 'src/app/services/cloud.service';
 })
 export class HomeComponent implements OnInit {
 
-  allCapitulos
-  capSelect
+  @ViewChild("listado") listado: ListadoComponent;
+  allCapitulos = []
+  capSelect = null
   
   constructor(private cloudService: CloudService) { }
   
   ngOnInit(): void {
-    this.allCapitulos = this.cloudService.getAllLinks().files;
     
+    this.cloudService.getAllLinks().subscribe(
+      data=>{
+        this.allCapitulos = data["files"]
+        setTimeout(() => {
+          this.listado.loadData();
+        }, 200);
+      }
+    );
   }
 
 
   seleccionar(event){
     this.capSelect = event
+  }
+
+  verListado(){
+    this.capSelect=null;
+    setTimeout(() => {
+      this.listado.loadData()
+    }, 200);
   }
 }

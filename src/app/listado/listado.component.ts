@@ -13,14 +13,17 @@ export class ListadoComponent implements OnInit {
   capitulos = []
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+  }
+
+  loadData(){
     var aux = []
     this.allCapitulos.forEach(element => {
       if(element.mimeType.includes("video")){
         aux.push(element)
         var data = element.name.split("Los Simpsons ")[1].split(" -")[0]
-        var temporada = data.split("x")[0]
-        var capitulo = data.split("x")[1]
+        /*var temporada = data.split("x")[0]
+        var capitulo = data.split("x")[1]*/
 
       }
       if(element.mimeType.includes("folder")&&element.name.includes("Temporada")){
@@ -47,7 +50,12 @@ export class ListadoComponent implements OnInit {
         if(temporada==numeroTemp){aux.push(element)}
       }
     });
+    aux.sort(this.SortArray)
+    console.log(aux)
     this.capitulos = aux
+  }
+  SortArray(x, y){
+    return x.name.localeCompare(y.name);
   }
 
 }
