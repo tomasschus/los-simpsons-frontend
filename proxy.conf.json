@@ -1,6 +1,6 @@
 {
     "/api/*":{
-        "target":"http://localhost:4000",
+        "target":"https://api-simpsons.herokuapp.com/",
         "secure":false,
         "logLevel":"debug"
     }
