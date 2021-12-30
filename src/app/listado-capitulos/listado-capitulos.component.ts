@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-listado',
-  templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.css']
+  selector: 'app-listado-capitulos',
+  templateUrl: './listado-capitulos.component.html',
+  styleUrls: ['./listado-capitulos.component.css']
 })
-export class ListadoComponent implements OnInit {
+export class ListadoCapitulosComponent implements OnInit {
 
   @Input() allCapitulos;
   @Output() seleccion = new EventEmitter()
@@ -57,5 +57,6 @@ export class ListadoComponent implements OnInit {
   SortArray(x, y){
     return x.name.localeCompare(y.name);
   }
+
 
 }

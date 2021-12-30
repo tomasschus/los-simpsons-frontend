@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ListadoComponent } from 'src/app/listado/listado.component';
-import { CloudService } from 'src/app/services/cloud.service';
+import { ListadoCapitulosComponent } from '../listado-capitulos/listado-capitulos.component';
+import { TemporadasService } from '../services/temporadas.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +9,15 @@ import { CloudService } from 'src/app/services/cloud.service';
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild("listado") listado: ListadoComponent;
+  
+  @ViewChild("listado") listado: ListadoCapitulosComponent;
   allCapitulos = []
   capSelect = null
   
-  constructor(private cloudService: CloudService) { }
+  constructor(private cloudService: TemporadasService) { }
   
   ngOnInit(): void {
-    
+
     this.cloudService.getAllLinks().subscribe(
       data=>{
         this.allCapitulos = data["files"]
@@ -38,4 +39,5 @@ export class HomeComponent implements OnInit {
       this.listado.loadData()
     }, 200);
   }
+
 }

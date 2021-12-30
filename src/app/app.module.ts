@@ -1,30 +1,32 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { CloudService } from './services/cloud.service';
-import { CapituloComponent } from './components/capitulo/capitulo.component';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { HttpModule } from '@angular/http';
+import { HomeComponent } from './home/home.component';
+import { ListadoCapitulosComponent } from './listado-capitulos/listado-capitulos.component';
+import { TemporadasService } from './services/temporadas.service';
+import { CapituloComponent } from './capitulo/capitulo.component';
+import { SafePipe } from './capitulo/safe.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { ListadoComponent } from './listado/listado.component';
-import { SafePipe } from './components/capitulo/safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ListadoCapitulosComponent,
     CapituloComponent,
-    ListadoComponent,
     SafePipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [
-    CloudService, 
-  ],
+  providers: [TemporadasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

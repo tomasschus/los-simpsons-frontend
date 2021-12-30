@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CloudService {
+@Injectable()
+export class TemporadasService {
 
   constructor(private http: HttpClient) { }
 
   getAllLinks(){
     console.log(this.http)
-    return this.http.get(environment.url+"/allLinks");
+    return this.http.get("https://api-simpsons.herokuapp.com/api/allLinks");
     
   }
+
 }

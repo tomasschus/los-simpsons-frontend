@@ -1,27 +1,22 @@
-# LosSimpsonsFrontend
+#Angular + Express + Heroku Starter app
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+## Project setup
 
-## Development server
+This project is already configured for deploying on Heroku, following their instructions.
+See it running at: https://angular-express-starter-2017.herokuapp.com/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You can get to https://angular-express-starter-2017.herokuapp.com/api/test to try the Express routing
 
-## Code scaffolding
+Project is based on the tutorial at https://devcenter.heroku.com/articles/mean-apps-restful-api.
+A few changes had to be made in order for it to successfully deploy to Heroku, that the tutorial misses to explain or maybe changed since then.
+Some of them:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Added these instructions to Package.json (inside "scripts"):
+"preinstall": "npm install -g @angular/cli",
+"postinstall": "ng build --prod"
 
-## Build
+2. Had to move the Angular-Cli dependencies from devDependencies in order for Heroku to be able to run "ng" commands 
+"@angular/cli": "^1.3.2",
+"@angular/compiler-cli": "^4.4.3",
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+More instructions to come.

@@ -1,0 +1,27 @@
+<div *ngIf="temporadaSeleccionada!=''">
+  <button class="btn btn-warning" (click)="temporadaSeleccionada=''">volver</button>
+  Listado de capitulos:
+  <div class="container d-flex">
+      <div class="row justify-content-md-center">
+
+          <div class="col col-sm-4 pt-4 border justify-content-center" *ngFor="let item of capitulos">
+              <p class="text-center">{{item.name.split("-")[1].split(".")[0]}}</p>
+              <p class="text-center">{{item.name.split("-")[0]}}</p>
+              <a href="#" (click)="seleccionar(item)" class="btn btn-primary ">Ver Capitulo</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="temporadaSeleccionada==''" >
+  Selecciona la temporada:
+  <div class="container d-flex">
+      <div class="row justify-content-md-center">
+          <div class="col col-sm-4 pt-4 border justify-content-center" *ngFor="let item of temporadas">
+              <p class="text-center">{{item}}</p>
+              <p></p>
+              <a href="#" (click)="seleccionarTemporada(item)" class="btn btn-primary ">Ingresar</a>
+          </div>
+      </div>
+  </div>
+</div>
