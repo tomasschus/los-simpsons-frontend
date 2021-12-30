@@ -11,7 +11,7 @@ export class CloudService {
 
   getAllLinks(){
     console.log(this.http)
-    return this.http.get("localhost:4000/api/allLinks");
+    return this.http.get(environment.url+"/allLinks");
     
   }
 }

@@ -10,8 +10,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
-          "strict": false,
-          "strictPropertyInitialization":false
+          "strict": false
         }
       },
       "root": "",
@@ -70,12 +69,19 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "los-simpsons-frontend:build",
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "los-simpsons-frontend:build:production"
+              "browserTarget": "los-simpsons-frontend:build:production",
+              "proxyConfig": "proxy.conf.json"
             },
             "development": {
-              "browserTarget": "los-simpsons-frontend:build:development"
+              "browserTarget": "los-simpsons-frontend:build:development",
+              "proxyConfig": "proxy.conf.json"
+
             }
           },
           "defaultConfiguration": "development"
