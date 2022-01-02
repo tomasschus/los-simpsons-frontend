@@ -1,13 +1,10 @@
-
 <div>
   <button class="btn btn-warning" (click)="volverBtn()">Volver</button>
   <p>Nombre del capitulo: {{capSelect.name}}</p>
 
-  <iframe 
-      *ngIf="capSelect!=undefined" 
-      [src]="urlFinal|safe" 
-      width="640" height="480" 
-      allowfullscreen>
-  </iframe>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" *ngIf="capSelect!=undefined" [src]="urlFinal|safe" allowfullscreen>
+    </iframe>
+  </div>
 
 </div>

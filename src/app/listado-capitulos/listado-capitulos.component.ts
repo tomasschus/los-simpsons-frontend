@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { elementEventFullName } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-listado-capitulos',
@@ -11,10 +12,13 @@ export class ListadoCapitulosComponent implements OnInit {
   @Output() seleccion = new EventEmitter()
   temporadas = []
   capitulos = []
+  portadas = {}
+
   constructor() { }
 
   ngOnInit(): void {    
   }
+
 
   loadData(){
     var aux = []
@@ -29,8 +33,14 @@ export class ListadoCapitulosComponent implements OnInit {
       if(element.mimeType.includes("folder")&&element.name.includes("Temporada")){
         this.temporadas.push(element.name)
       }
+
+      if(element.mimeType.includes("image")){
+        var name  = element.name.split(".")
+        this.portadas[name[0]] = (element)
+      }
     });
     this.temporadas.sort()
+    console.log(this.portadas)
   }
 
   seleccionar(event){
@@ -56,6 +66,11 @@ export class ListadoCapitulosComponent implements OnInit {
   }
   SortArray(x, y){
     return x.name.localeCompare(y.name);
+  }
+
+  getPortadaByTemporada(item){
+    var number = parseInt(item.split(" ")[1]);
+    return( "https://drive.google.com/uc?id=" + this.portadas[number]["id"])
   }
 
 
