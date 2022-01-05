@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   
   @ViewChild("listado") listado: ListadoCapitulosComponent;
   allCapitulos = []
-  capSelect = null
+  capSelect = null 
   
   constructor(private cloudService: TemporadasService) { }
   

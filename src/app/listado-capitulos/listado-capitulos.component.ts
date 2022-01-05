@@ -11,6 +11,8 @@ export class ListadoCapitulosComponent implements OnInit {
   @Output() seleccion = new EventEmitter()
   temporadas = []
   capitulos = []
+  portadas = {}
+
   constructor() { }
 
   ngOnInit(): void {    
@@ -21,10 +23,9 @@ export class ListadoCapitulosComponent implements OnInit {
     this.allCapitulos.forEach(element => {
       if(element.mimeType.includes("video")){
         aux.push(element)
-        var data = element.name.split("Los Simpsons ")[1].split(" -")[0]
-        /*var temporada = data.split("x")[0]
-        var capitulo = data.split("x")[1]*/
-
+      }
+      if(element.mimeType.includes("image")){
+        this.portadas[element.name.split(".")[0]] = element
       }
       if(element.mimeType.includes("folder")&&element.name.includes("Temporada")){
         this.temporadas.push(element.name)
@@ -45,13 +46,19 @@ export class ListadoCapitulosComponent implements OnInit {
     var aux = []
     this.allCapitulos.forEach(element => {
       if(element.mimeType.includes("video")){
-        var data = element.name.split("Los Simpsons ")[1].split(" -")[0]
-        var temporada = parseInt(data.split("x")[0])
-        if(temporada==numeroTemp){aux.push(element)}
+        try{
+          var data = element.name.split(" ")[2] 
+          var temporada = parseInt(data.split("x")[0])
+          if(temporada==numeroTemp){
+            aux.push(element)
+          }
+        }
+        catch (error){
+          console.log(error)
+        }
       }
     });
     aux.sort(this.SortArray)
-    console.log(aux)
     this.capitulos = aux
   }
   SortArray(x, y){

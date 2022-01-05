@@ -3,4 +3,4 @@
 
 <app-listado-capitulos #listado *ngIf="capSelect == null" [allCapitulos]="allCapitulos" (seleccion)="seleccionar($event)"> </app-listado-capitulos>
 
-<app-capitulo *ngIf="capSelect!=null" [capSelect]="capSelect" (volver)="verListado()"></app-capitulo>
+<app-capitulo *ngIf="capSelect!=null" [capSelect]="capSelect" (volver)="verListado()"></app-capitulo> 

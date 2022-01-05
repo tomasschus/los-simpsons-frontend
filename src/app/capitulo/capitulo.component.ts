@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./capitulo.component.css']
 })
 export class CapituloComponent implements OnInit {
-
+ 
   @Input() capSelect;
   @Output() volver = new EventEmitter()
 
