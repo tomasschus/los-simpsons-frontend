@@ -11,9 +11,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of capitulos">
-                <th scope="row">{{item.name.split(" ")[2]}}</th>
-                <td>{{item.name.split("-")[1].split(".")[0]}}</td>
+            <tr *ngFor="let item of temporadas[temporadaSeleccionada]">
+                <th scope="row">{{item.name.split(" ")[1]}}</th>
+                <td>{{item.name}}</td>
                 <td> <a href="#" (click)="seleccionar(item)" class="btn btn-primary ">Ver Capitulo</a> </td>
             </tr>
         </tbody>
@@ -42,10 +42,10 @@
               <p></p>
               <a href="#" (click)="seleccionarTemporada(item)" class="btn btn-primary ">Ingresar</a>
           </div>-->
-            <div class="card m-2" *ngFor="let item of temporadas">
+            <div class="card m-2" *ngFor="let item of keysTemporadas">
                 <img class="card-img-top" src="..." alt="Card image cap">
                 <div class="card-body">
-                    <p class="text-center">{{item}}</p>
+                    <p class="text-center">Temporada {{item}}</p>
                     <p></p>
                     <a href="#" (click)="seleccionarTemporada(item)" class="btn btn-primary ">Ingresar</a>
                 </div>

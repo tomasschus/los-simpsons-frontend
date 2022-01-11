@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   
   @ViewChild("listado") listado: ListadoCapitulosComponent;
-  allCapitulos = []
+  allCapitulos = null
   capSelect = null 
   
   constructor(private cloudService: TemporadasService) { }
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
     this.cloudService.getAllLinks().subscribe(
       data=>{
-        this.allCapitulos = data["files"]
+        this.allCapitulos = data
         setTimeout(() => {
           this.listado.loadData();
         }, 200);

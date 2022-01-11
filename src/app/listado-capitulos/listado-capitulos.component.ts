@@ -9,7 +9,8 @@ export class ListadoCapitulosComponent implements OnInit {
 
   @Input() allCapitulos;
   @Output() seleccion = new EventEmitter()
-  temporadas = []
+  temporadas = {}
+  keysTemporadas = []
   capitulos = []
   portadas = {}
 
@@ -19,19 +20,25 @@ export class ListadoCapitulosComponent implements OnInit {
   }
 
   loadData(){
-    var aux = []
     this.allCapitulos.forEach(element => {
-      if(element.mimeType.includes("video")){
-        aux.push(element)
-      }
-      if(element.mimeType.includes("image")){
-        this.portadas[element.name.split(".")[0]] = element
-      }
-      if(element.mimeType.includes("folder")&&element.name.includes("Temporada")){
-        this.temporadas.push(element.name)
-      }
+       // separo por temporadas
+       let temp = element.name.split(" ")[1].split("x")[0] 
+       if (this.temporadas[temp]==null){
+        this.temporadas[temp] = []
+       }
+       this.temporadas[temp].push(element)
+       /*if(element.mimeType.includes("video")){
+         aux.push(element)
+       }
+       if(element.mimeType.includes("image")){
+         this.portadas[element.name.split(".")[0]] = element
+       }
+       if(element.mimeType.includes("folder")&&element.name.includes("Temporada")){
+         this.temporadas.push(element.name)
+       }*/
+     
     });
-    this.temporadas.sort()
+    this.keysTemporadas = Object.keys(this.temporadas)
   }
 
   seleccionar(event){
@@ -42,24 +49,6 @@ export class ListadoCapitulosComponent implements OnInit {
   temporadaSeleccionada = ""
   seleccionarTemporada(item){
     this.temporadaSeleccionada = item
-    var numeroTemp = parseInt(this.temporadaSeleccionada.split(" ")[1])
-    var aux = []
-    this.allCapitulos.forEach(element => {
-      if(element.mimeType.includes("video")){
-        try{
-          var data = element.name.split(" ")[2] 
-          var temporada = parseInt(data.split("x")[0])
-          if(temporada==numeroTemp){
-            aux.push(element)
-          }
-        }
-        catch (error){
-          console.log(error)
-        }
-      }
-    });
-    aux.sort(this.SortArray)
-    this.capitulos = aux
   }
   SortArray(x, y){
     return x.name.localeCompare(y.name);

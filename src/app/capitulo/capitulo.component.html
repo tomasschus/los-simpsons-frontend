@@ -1,9 +1,9 @@
 
-<div>
+<div class="container">
   <button class="btn btn-warning" (click)="volverBtn()">Volver</button>
-  <p>Nombre del capitulo: {{capSelect.name}}</p>
+  <p>Nombre del capitulo: {{nombreCap}}</p>
  
-  <iframe 
+  <iframe  class="embed-responsive embed-responsive-16by9"
       *ngIf="capSelect!=undefined" 
       [src]="urlFinal|safe" 
       width="640" height="480" 

@@ -10,13 +10,15 @@ export class CapituloComponent implements OnInit {
   @Input() capSelect;
   @Output() volver = new EventEmitter()
 
+  nombreCap: String=""
   urlFinal = ""
   constructor() { }
 
   ngOnInit(): void {
-    this.urlFinal = `https://drive.google.com/file/d/${this.capSelect["id"]}/preview` 
+    this.urlFinal = `//sendvid.com/embed/${this.capSelect["id"]}`
     console.log(this.urlFinal)
-    
+    this.nombreCap = this.capSelect.name.replace("LS", "Los Simpsons")
+
   }
 
   volverBtn(){
