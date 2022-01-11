@@ -8,8 +8,7 @@ export class TemporadasService {
 
   getAllLinks(){
     console.log(this.http)
-    //https://api-simpsons.herokuapp.com/api/allLinks
-    return this.http.get("http://localhost:4000/api/allLinks");
+    return this.http.get("https://api-simpsons.herokuapp.com/api/allLinks");
     
   }
 
