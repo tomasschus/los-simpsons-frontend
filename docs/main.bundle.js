@@ -155,7 +155,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/capitulo/capitulo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div>\n  <button class=\"btn btn-warning\" (click)=\"volverBtn()\">Volver</button>\n  <p>Nombre del capitulo: {{capSelect.name}}</p>\n \n  <iframe \n      *ngIf=\"capSelect!=undefined\" \n      [src]=\"urlFinal|safe\" \n      width=\"640\" height=\"480\" \n      allowfullscreen>\n  </iframe>\n\n</div>"
+module.exports = "\n<div class=\"container\">\n  <button class=\"btn btn-warning\" (click)=\"volverBtn()\">Volver</button>\n  <p>Nombre del capitulo: {{nombreCap}}</p>\n \n  <iframe  class=\"embed-responsive embed-responsive-16by9\"\n      *ngIf=\"capSelect!=undefined\" \n      [src]=\"urlFinal|safe\" \n      width=\"640\" height=\"480\" \n      allowfullscreen>\n  </iframe>\n\n</div>"
 
 /***/ }),
 
@@ -178,11 +178,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var CapituloComponent = (function () {
     function CapituloComponent() {
         this.volver = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+        this.nombreCap = "";
         this.urlFinal = "";
     }
     CapituloComponent.prototype.ngOnInit = function () {
-        this.urlFinal = "https://drive.google.com/file/d/" + this.capSelect["id"] + "/preview";
+        this.urlFinal = "//sendvid.com/embed/" + this.capSelect["id"];
         console.log(this.urlFinal);
+        this.nombreCap = this.capSelect.name.replace("LS", "Los Simpsons");
     };
     CapituloComponent.prototype.volverBtn = function () {
         this.volver.emit(null);
@@ -297,13 +299,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var HomeComponent = (function () {
     function HomeComponent(cloudService) {
         this.cloudService = cloudService;
-        this.allCapitulos = [];
+        this.allCapitulos = null;
         this.capSelect = null;
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.cloudService.getAllLinks().subscribe(function (data) {
-            _this.allCapitulos = data["files"];
+            _this.allCapitulos = data;
             setTimeout(function () {
                 _this.listado.loadData();
             }, 200);
@@ -360,7 +362,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/listado-capitulos/listado-capitulos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"temporadaSeleccionada!=''\">\n    <button class=\"btn btn-warning\" (click)=\"temporadaSeleccionada=''\">volver</button>\n    Listado de capitulos:\n\n    <table class=\"table\">\n        <thead>\n            <tr>\n                <th scope=\"col\">#</th>\n                <th scope=\"col\">Nombre</th>\n                <th scope=\"col\">Ver</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr *ngFor=\"let item of capitulos\">\n                <th scope=\"row\">{{item.name.split(\" \")[2]}}</th>\n                <td>{{item.name.split(\"-\")[1].split(\".\")[0]}}</td>\n                <td> <a href=\"#\" (click)=\"seleccionar(item)\" class=\"btn btn-primary \">Ver Capitulo</a> </td>\n            </tr>\n        </tbody>\n    </table>\n\n    <!--\n         <div class=\"container d-flex\">\n              <div class=\"row justify-content-md-center\">\n\n          <div class=\"col col-sm-4 pt-4 border justify-content-center\" *ngFor=\"let item of capitulos\">\n              <p class=\"text-center\">{{item.name.split(\"-\")[1].split(\".\")[0]}}</p>\n              <p class=\"text-center\">{{item.name.split(\" \")[2]}}</p>\n              <a href=\"#\" (click)=\"seleccionar(item)\" class=\"btn btn-primary \">Ver Capitulo</a>\n          </div>\n      </div> \n    </div>-->\n\n</div>\n\n<div *ngIf=\"temporadaSeleccionada==''\">\n    Selecciona la temporada:\n    <div class=\"d-flex p-2\">\n        <div class=\"row justify-content-md-center\">\n            <!--<div class=\"col col-sm-4 pt-4 border justify-content-center\" *ngFor=\"let item of temporadas\">\n              <p class=\"text-center\">{{item}}</p>\n              <p></p>\n              <a href=\"#\" (click)=\"seleccionarTemporada(item)\" class=\"btn btn-primary \">Ingresar</a>\n          </div>-->\n            <div class=\"card m-2\" *ngFor=\"let item of temporadas\">\n                <img class=\"card-img-top\" src=\"...\" alt=\"Card image cap\">\n                <div class=\"card-body\">\n                    <p class=\"text-center\">{{item}}</p>\n                    <p></p>\n                    <a href=\"#\" (click)=\"seleccionarTemporada(item)\" class=\"btn btn-primary \">Ingresar</a>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div *ngIf=\"temporadaSeleccionada!=''\">\n    <button class=\"btn btn-warning\" (click)=\"temporadaSeleccionada=''\">volver</button>\n    Listado de capitulos:\n\n    <table class=\"table\">\n        <thead>\n            <tr>\n                <th scope=\"col\">#</th>\n                <th scope=\"col\">Nombre</th>\n                <th scope=\"col\">Ver</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr *ngFor=\"let item of temporadas[temporadaSeleccionada]\">\n                <th scope=\"row\">{{item.name.split(\" \")[1]}}</th>\n                <td>{{item.name}}</td>\n                <td> <a href=\"#\" (click)=\"seleccionar(item)\" class=\"btn btn-primary \">Ver Capitulo</a> </td>\n            </tr>\n        </tbody>\n    </table>\n\n    <!--\n         <div class=\"container d-flex\">\n              <div class=\"row justify-content-md-center\">\n\n          <div class=\"col col-sm-4 pt-4 border justify-content-center\" *ngFor=\"let item of capitulos\">\n              <p class=\"text-center\">{{item.name.split(\"-\")[1].split(\".\")[0]}}</p>\n              <p class=\"text-center\">{{item.name.split(\" \")[2]}}</p>\n              <a href=\"#\" (click)=\"seleccionar(item)\" class=\"btn btn-primary \">Ver Capitulo</a>\n          </div>\n      </div> \n    </div>-->\n\n</div>\n\n<div *ngIf=\"temporadaSeleccionada==''\">\n    Selecciona la temporada:\n    <div class=\"d-flex p-2\">\n        <div class=\"row justify-content-md-center\">\n            <!--<div class=\"col col-sm-4 pt-4 border justify-content-center\" *ngFor=\"let item of temporadas\">\n              <p class=\"text-center\">{{item}}</p>\n              <p></p>\n              <a href=\"#\" (click)=\"seleccionarTemporada(item)\" class=\"btn btn-primary \">Ingresar</a>\n          </div>-->\n            <div class=\"card m-2\" *ngFor=\"let item of keysTemporadas\">\n                <img class=\"card-img-top\" src=\"...\" alt=\"Card image cap\">\n                <div class=\"card-body\">\n                    <p class=\"text-center\">Temporada {{item}}</p>\n                    <p></p>\n                    <a href=\"#\" (click)=\"seleccionarTemporada(item)\" class=\"btn btn-primary \">Ingresar</a>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -383,7 +385,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ListadoCapitulosComponent = (function () {
     function ListadoCapitulosComponent() {
         this.seleccion = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
-        this.temporadas = [];
+        this.temporadas = {};
+        this.keysTemporadas = [];
         this.capitulos = [];
         this.portadas = {};
         this.temporadaSeleccionada = "";
@@ -392,43 +395,30 @@ var ListadoCapitulosComponent = (function () {
     };
     ListadoCapitulosComponent.prototype.loadData = function () {
         var _this = this;
-        var aux = [];
         this.allCapitulos.forEach(function (element) {
-            if (element.mimeType.includes("video")) {
-                aux.push(element);
+            // separo por temporadas
+            var temp = element.name.split(" ")[1].split("x")[0];
+            if (_this.temporadas[temp] == null) {
+                _this.temporadas[temp] = [];
             }
-            if (element.mimeType.includes("image")) {
-                _this.portadas[element.name.split(".")[0]] = element;
+            _this.temporadas[temp].push(element);
+            /*if(element.mimeType.includes("video")){
+              aux.push(element)
             }
-            if (element.mimeType.includes("folder") && element.name.includes("Temporada")) {
-                _this.temporadas.push(element.name);
+            if(element.mimeType.includes("image")){
+              this.portadas[element.name.split(".")[0]] = element
             }
+            if(element.mimeType.includes("folder")&&element.name.includes("Temporada")){
+              this.temporadas.push(element.name)
+            }*/
         });
-        this.temporadas.sort();
+        this.keysTemporadas = Object.keys(this.temporadas);
     };
     ListadoCapitulosComponent.prototype.seleccionar = function (event) {
         this.seleccion.emit(event);
     };
     ListadoCapitulosComponent.prototype.seleccionarTemporada = function (item) {
         this.temporadaSeleccionada = item;
-        var numeroTemp = parseInt(this.temporadaSeleccionada.split(" ")[1]);
-        var aux = [];
-        this.allCapitulos.forEach(function (element) {
-            if (element.mimeType.includes("video")) {
-                try {
-                    var data = element.name.split(" ")[2];
-                    var temporada = parseInt(data.split("x")[0]);
-                    if (temporada == numeroTemp) {
-                        aux.push(element);
-                    }
-                }
-                catch (error) {
-                    console.log(error);
-                }
-            }
-        });
-        aux.sort(this.SortArray);
-        this.capitulos = aux;
     };
     ListadoCapitulosComponent.prototype.SortArray = function (x, y) {
         return x.name.localeCompare(y.name);
